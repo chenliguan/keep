@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.keep">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".keeplive.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 锁屏界面 -->
+        <activity
+            android:theme="@style/KeepLiveStyle"
+            android:name=".keep.KeepLiveActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <service android:name=".keep.MyService"/>
+
+
+        <!-- 双进程守护 -->
+        <service android:name=".keeplive.LocalService"/>
+
+        <service
+            android:name=".keeplive.RemoteService"
+            android:process=":remoteprocess" />
+
+        <service android:name=".keeplive.JobHandleService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+    </application>
+
+</manifest>
